@@ -40,6 +40,41 @@ const LogInRegister = () => {
             })
     }
 
+    const signup = (event: any) => {
+        event.preventDefault()
+
+        const endpoint = 'https://cors-anywhere.herokuapp.com/206.189.91.54/api/v1/auth'
+        const method = 'POST'
+        const headers = { 'Content-Type': 'application/json' }
+        const body = JSON.stringify({ email, password, password_confirmation: passwordConfirmation })
+
+        fetch(endpoint, { method, headers , body })
+            .then(response => {
+                if(response.status == 200) {
+                    const endpoint = 'https://cors-anywhere.herokuapp.com/206.189.91.54/api/v1/auth/sign_in'
+                    const method = 'POST'
+                    const headers = { 'Content-Type': 'application/json' }
+                    const body = JSON.stringify({ email, password })
+            
+                    fetch(endpoint, { method, headers , body })
+                    .then(response => {
+                        if(response.status == 200) {
+                            setSession({
+                                accessToken: response.headers.get('access-token'),
+                                client: response.headers.get('client'),
+                                uid: response.headers.get('uid'),
+                                expiry: response.headers.get('expiry')
+                            })
+                        } else {
+                            //Put Error Message
+                        }
+                    })
+                } else {
+                    //Put Error Message
+                }
+            })
+    }
+
     return (
         <>
             <div className={"container " + (isRegisterMode ? 'register-mode' : '')}>
@@ -75,7 +110,7 @@ const LogInRegister = () => {
                                 <i className="fas fa-lock"></i>
                                 <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password"onChange={event => setPasswordConfirmation(event.target.value)}/>
                             </div>
-                            <button type="submit" className="btn solid" value="Register">Register</button>
+                            <button type="submit" className="btn solid" value="Register" onClick={signup}>Register</button>
                         </form>
                     </div>
                 </div>
