@@ -1,5 +1,5 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState, useContext } from "react";
+import SessionContext from "../contexts/SessionContext";
 import log from '../log.svg'
 import register from '../register.svg'
 
@@ -11,6 +11,33 @@ const LogInRegister = () => {
         setIsRegisterMode(!isRegisterMode);
     }
 
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+
+    const { setSession } = useContext(SessionContext)
+
+    const login = (event: any) => {
+        event.preventDefault()
+
+        const endpoint = 'https://cors-anywhere.herokuapp.com/206.189.91.54/api/v1/auth/sign_in'
+        const method = 'POST'
+        const headers = { 'Content-Type': 'application/json' }
+        const body = JSON.stringify({ email, password })
+
+        fetch(endpoint, { method, headers , body })
+            .then(response => {
+                if(response.status == 200) {
+                    setSession({
+                        accessToken: response.headers.get('access-token'),
+                        client: response.headers.get('client'),
+                        uid: response.headers.get('uid'),
+                        expiry: response.headers.get('expiry')
+                    })
+                } else {
+                    // Set errors here
+                }
+            })
+    }
 
     return (
         <>
@@ -21,11 +48,11 @@ const LogInRegister = () => {
                             <h2 className="title">Log in</h2>
                             <div className="input-field">
                                 <i className="fas fa-envelope"></i>
-                                <input type="email" name="emailLogin" id="emailLogin" placeholder="Email"/>
+                                <input type="email" name="emailLogin" id="emailLogin" placeholder="Email" onChange={event => setEmail(event.target.value)}/>
                             </div>
                             <div className="input-field">
                                 <i className="fas fa-lock"></i>
-                                <input type="password" name="passwordLogin" id="passwordLogin" placeholder="Password"/>
+                                <input type="password" name="passwordLogin" id="passwordLogin" placeholder="Password" onChange={event => setPassword(event.target.value)}/>
                             </div>
                             <button type="submit" value="Login" className="btn solid">Login</button>
                         </form>
