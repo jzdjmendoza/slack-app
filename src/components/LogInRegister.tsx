@@ -1,5 +1,7 @@
 import React from "react";
 import { useState } from "react";
+import log from '../log.svg'
+import register from '../register.svg'
 
 const LogInRegister = () => {
 
@@ -61,7 +63,7 @@ const LogInRegister = () => {
                         Register
                         </button>
                     </div>
-                    <img src="img/log.svg" className="image" alt=""/>
+                    <img src={log} className="image" alt=""/>
                     </div>
                     <div className="panel right-panel">
                     <div className="content">
@@ -73,7 +75,7 @@ const LogInRegister = () => {
                         Log In
                         </button>
                     </div>
-                    <img src="img/register.svg" className="image" alt=""/>
+                    <img src={register} className="image" alt=""/>
                     </div>
                 </div>
             </div>
