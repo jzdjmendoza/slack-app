@@ -25,7 +25,7 @@ const LogInRegister = () => {
                                 <i className="fas fa-lock"></i>
                                 <input type="password" name="passwordLogin" id="passwordLogin" placeholder="Password"/>
                             </div>
-                            <input type="submit" value="Login" className="btn solid"/>
+                            <button type="submit" value="Login" className="btn solid">Login</button>
                         </form>
                         <form id="registerForm" className="register-form">
                             <h2 className="title">Register</h2>
@@ -45,7 +45,7 @@ const LogInRegister = () => {
                                 <i className="fas fa-lock"></i>
                                 <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password"/>
                             </div>
-                            <input type="submit" className="btn solid" value="Register"/>
+                            <button type="submit" className="btn solid" value="Register">Register</button>
                         </form>
                     </div>
                 </div>

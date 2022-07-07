@@ -54,6 +54,7 @@
   },
   "homepage": "/",
   "devDependencies": {
+    "@fortawesome/fontawesome-free": "^6.1.1",
     "autoprefixer": "^10.4.7",
     "postcss": "^8.4.14",
     "tailwindcss": "^3.1.4"
