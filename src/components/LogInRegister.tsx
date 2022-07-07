@@ -13,6 +13,7 @@ const LogInRegister = () => {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [passwordConfirmation, setPasswordConfirmation] = useState('')
 
     const { setSession } = useContext(SessionContext)
 
@@ -34,7 +35,7 @@ const LogInRegister = () => {
                         expiry: response.headers.get('expiry')
                     })
                 } else {
-                    // Set errors here
+                    //Put Error Message
                 }
             })
     }
@@ -54,25 +55,25 @@ const LogInRegister = () => {
                                 <i className="fas fa-lock"></i>
                                 <input type="password" name="passwordLogin" id="passwordLogin" placeholder="Password" onChange={event => setPassword(event.target.value)}/>
                             </div>
-                            <button type="submit" value="Login" className="btn solid">Login</button>
+                            <button type="submit" value="Login" className="btn solid" onClick={login}>Login</button>
                         </form>
                         <form id="registerForm" className="register-form">
                             <h2 className="title">Register</h2>
                             <div className="input-field">
                                 <i className="fas fa-user"></i>
-                                <input type="text" name="fullName" id="fullName" placeholder="Full Name"/>
+                                <input type="text" name="fullName" id="fullName" placeholder="Full Name" />
                             </div>
                             <div className="input-field">
                                 <i className="fas fa-envelope"></i>
-                                <input type="email" name="email" id="email" placeholder="Email"/>
+                                <input type="email" name="email" id="email" placeholder="Email" onChange={event => setEmail(event.target.value)}/>
                             </div>
                             <div className="input-field">
                                 <i className="fas fa-lock"></i>
-                                <input type="password" name="password" id="password" placeholder="Password"/>
+                                <input type="password" name="password" id="password" placeholder="Password" onChange={event => setPassword(event.target.value)}/>
                             </div>
                             <div className="input-field">
                                 <i className="fas fa-lock"></i>
-                                <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password"/>
+                                <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password"onChange={event => setPasswordConfirmation(event.target.value)}/>
                             </div>
                             <button type="submit" className="btn solid" value="Register">Register</button>
                         </form>
