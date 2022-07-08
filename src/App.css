@@ -400,3 +400,9 @@ select:invalid {
     left: 50%;
   }
 }
+
+
+//Header
+.navbar {
+  overscroll-behavior: none;
+}
