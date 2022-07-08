@@ -4,7 +4,7 @@ import '../App.css'
 const Sidebar = () => {
     return (
         <>
-            <div></div>
+            <div className='flex w-1/4 h-full'></div>
         </>
     )
 }
