@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import SessionContext from "../contexts/SessionContext";
 import log from '../log.svg'
 import register from '../register.svg'
@@ -17,7 +17,7 @@ const LogInRegister = () => {
     const [errors, setErrors] = useState('')
     const [busy, setBusy] = useState(false)
 
-    const { setSession } = useContext(SessionContext) 
+    const { session, setSession } = useContext(SessionContext)
 
     const login = (event: any) => {
         event.preventDefault()
@@ -39,8 +39,7 @@ const LogInRegister = () => {
                         client: response.headers.get('client'),
                         uid: response.headers.get('uid'),
                         expiry: response.headers.get('expiry')
-                        
-                    })  
+                    })
                 } else {
                     setErrors('User not found')
                 }

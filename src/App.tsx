@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import LogInRegister from './components/LogInRegister'
 import MainPage from './components/MainPage'
-import SessionContext from './contexts/SessionContext'
+import SessionContext, { usePersistedSession } from './contexts/SessionContext'
 import { Session } from 'inspector';
 
 function App() {
-  const [session, setSession] = useState<any>(null)
+  const [session, setSession] = usePersistedSession(null)
+
+  useEffect(() => {
+    console.log(session)
+  })
 
   return (
     <div className="App">
