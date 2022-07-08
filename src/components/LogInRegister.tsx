@@ -14,8 +14,10 @@ const LogInRegister = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [passwordConfirmation, setPasswordConfirmation] = useState('')
+    const [errors, setErrors] = useState('')
+    const [busy, setBusy] = useState(false)
 
-    const { setSession } = useContext(SessionContext)
+    const { setSession } = useContext(SessionContext) 
 
     const login = (event: any) => {
         event.preventDefault()
@@ -25,20 +27,30 @@ const LogInRegister = () => {
         const headers = { 'Content-Type': 'application/json' }
         const body = JSON.stringify({ email, password })
 
+        setBusy(true)
+        
         fetch(endpoint, { method, headers , body })
             .then(response => {
+                setBusy(false)
+
                 if(response.status == 200) {
                     setSession({
                         accessToken: response.headers.get('access-token'),
                         client: response.headers.get('client'),
                         uid: response.headers.get('uid'),
                         expiry: response.headers.get('expiry')
-                    })
+                        
+                    })  
                 } else {
-                    //Put Error Message
+                    setErrors('User not found')
                 }
             })
+            .catch(error => {
+                setBusy(false)
+            })
     }
+
+    
 
     const signup = (event: any) => {
         event.preventDefault()
@@ -90,7 +102,8 @@ const LogInRegister = () => {
                                 <i className="fas fa-lock"></i>
                                 <input type="password" name="passwordLogin" id="passwordLogin" placeholder="Password" onChange={event => setPassword(event.target.value)}/>
                             </div>
-                            <button type="submit" value="Login" className="btn solid" onClick={login}>Login</button>
+                            <button disabled={busy} type="submit" value="Login" className="btn solid" onClick={login}>Login</button>
+                            {errors ? <p>{errors}</p> : null}
                         </form>
                         <form id="registerForm" className="register-form">
                             <h2 className="title">Register</h2>

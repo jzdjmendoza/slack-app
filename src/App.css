@@ -138,10 +138,18 @@ select:invalid {
   transition: 0.5s;
 }
 
+.btn:disabled {
+  background-color: #ddd;
+}
+
 .btn.solid:hover {
   background-color: #fff;
   color: #E21484;
   border: 1px solid #E21484;
+}
+
+.btn:disabled:hover {
+  background-color: #ddd;
 }
 
 .panels-container {
