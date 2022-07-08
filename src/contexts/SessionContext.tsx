@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 
 export const usePersistedSession = (value: any) => {
   const [session, setSession] = useState<any>(() => {
-    const persistedSession = JSON.parse(localStorage.getItem('session') || '')
+    const persistedSession = JSON.parse(localStorage.getItem('session') || 'null')
 
     return persistedSession || value
   })
