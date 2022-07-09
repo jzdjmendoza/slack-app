@@ -41,7 +41,7 @@ const LogInRegister = () => {
                         expiry: response.headers.get('expiry')
                     })
                 } else {
-                    setErrors('User not found')
+                    setErrors('*User not found')
                 }
             })
             .catch(error => {
@@ -101,8 +101,8 @@ const LogInRegister = () => {
                                 <i className="fas fa-lock"></i>
                                 <input type="password" name="passwordLogin" id="passwordLogin" placeholder="Password" onChange={event => setPassword(event.target.value)}/>
                             </div>
+                            {errors ? <p className="text-rose-500">{errors}</p> : null}
                             <button disabled={busy} type="submit" value="Login" className="btn solid" onClick={login}>Login</button>
-                            {errors ? <p>{errors}</p> : null}
                         </form>
                         <form id="registerForm" className="register-form">
                             <h2 className="title">Register</h2>
