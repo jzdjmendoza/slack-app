@@ -59,7 +59,6 @@ const Sidebar = () => {
                         </h2>
                         <div id="directMessageAccordion" className="accordion-collapse collapse" aria-labelledby="directMessageTitle">
                             <div className="accordion-body py-4 px-5">
-                                <ChannelList />
                             </div>
                         </div>
                     </div>
