@@ -1,5 +1,6 @@
 import { useContext } from "react"
 import SessionContext from "../contexts/SessionContext"
+import 'tw-elements';
 
 export default function NewChannel() {
     const { session } = useContext(SessionContext)
@@ -22,7 +23,7 @@ export default function NewChannel() {
         fetch(endpoint, { method, headers, body })
     }
     return (
-        <button onClick={newChannel} className="hover:bg-slate-300 p-2 w-full flex justify-start items-center">
+        <button onClick={newChannel} className="hover:bg-slate-300 p-2 w-full flex justify-start items-center" data-mdb-ripple="true" data-mdb-ripple-color="primary">
             <span className="rounded-lg bg-blue-300 px-2 py-1 mx-2">
                 <i className="fas fa-plus"></i>
             </span>

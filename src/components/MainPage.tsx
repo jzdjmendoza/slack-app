@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from 'react'
 import { ScriptElementKindModifier } from 'typescript'
 import SessionContext from '../contexts/SessionContext'
 import Header from './Header'
+import SendMessage from './SendMessage'
 import Sidebar from './SideBar'
 
 export default function MainPage() {
@@ -10,25 +11,26 @@ export default function MainPage() {
       <div className="flex h-screen bg-sky-100">
         <div className="flex-1 flex flex-col overflow-hidden">
           <Header />
-          <div className="flex h-full">
+          <div className="flex w-full h-full">
             <Sidebar />
-            <main className="flex flex-col w-full bg-white overflow-x-hidden overflow-y-auto mb-14">
-              <div className="flex w-full mx-auto px-6 py-8">
-                <div className="flex flex-col w-full h-full text-gray-900 text-xl border-4 border-gray-900 border-dashed">
-                  <div className="flex w-full max-w-xl h-60 items-center justify-center mx-auto bg-green-400 border-b border-gray-600">Messages</div>
-                  <div className="flex w-full max-w-xl h-60 items-center justify-center mx-auto bg-green-400 border-b border-gray-600">Messages</div>
-                  <div className="flex w-full max-w-xl h-60 items-center justify-center mx-auto bg-green-400 border-b border-gray-600">Messages</div>
-                  <div className="flex w-full max-w-xl h-60 items-center justify-center mx-auto bg-green-400 border-b border-gray-600">Messages</div>
-                  <div className="flex w-full max-w-xl h-60 items-center justify-center mx-auto bg-green-400 border-b border-gray-600">Messages</div>
+            <div className="flex flex-col w-full">
+              <main className="flex-1 overflow-y-scroll bg-white">
+                <div className="flex flex-col w-full mx-auto px-6 py-8">
+                  <div className="flex flex-col w-full h-full text-gray-900 text-xl border-4 border-gray-900 border-dashed">
+                    <div className="flex w-full max-w-xl h-60 items-center justify-center mx-auto bg-green-400 border-b border-gray-600">Messages</div>
+                    <div className="flex w-full max-w-xl h-60 items-center justify-center mx-auto bg-green-400 border-b border-gray-600">Messages</div>
+                    <div className="flex w-full max-w-xl h-60 items-center justify-center mx-auto bg-green-400 border-b border-gray-600">Messages</div>
+                    <div className="flex w-full max-w-xl h-60 items-center justify-center mx-auto bg-green-400 border-b border-gray-600">Messages</div>
+                    <div className="flex w-full max-w-xl h-60 items-center justify-center mx-auto bg-green-400 border-b border-gray-600">Messages</div>
+                  </div>
                 </div>
+              </main>
+              <div className="w-full items-center text-center px-6 py-0 mb-12 sticky bottom-0 bg-white">
+                <SendMessage /> 
               </div>
-            </main>
-            {/* <nav className="flex w-72 h-full bg-yellow-400">
-              <div className="w-full flex mx-auto px-6 py-8">
-                <div className="w-full h-full flex items-center justify-center text-gray-900 text-xl border-4 border-gray-900 border-dashed">Rightbar</div>
-              </div>
-            </nav> */}
+            </div>
           </div>
+          
         </div>
       </div>
     </>
