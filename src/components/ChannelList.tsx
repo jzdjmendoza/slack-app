@@ -29,24 +29,6 @@ const ChannelList = () => {
     return () => clearTimeout(timer)
   }, [channels])
 
-  const newChannel = (event: any) => {
-    event.preventDefault()
-
-    const endpoint = 'http://localhost:3000/api/v1/channels'
-    const method = 'POST'
-    const headers = {
-      'Content-Type': 'application/json',
-      'expiry': session.expiry,
-      'uid': session.uid,
-      'access-token': session.accessToken,
-      'client': session.client
-    }
-    const name = `Channel ${Math.round(Math.random() * 10000)}`
-    const body = JSON.stringify({ name, user_ids: [] })
-    
-    fetch(endpoint, { method, headers, body })
-  }
-
   return(
     <div>
       <ul>
@@ -54,7 +36,6 @@ const ChannelList = () => {
         return <li>{channel.name}</li>
       })}
       </ul>
-      <button onClick={newChannel}>New Channel</button>
     </div>
   )
 }

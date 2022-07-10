@@ -1,7 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { ScriptElementKindModifier } from 'typescript'
 import SessionContext from '../contexts/SessionContext'
-import ChannelList from './ChannelList'
 import Header from './Header'
 import Sidebar from './SideBar'
 
@@ -13,7 +12,6 @@ export default function MainPage() {
           <Header />
           <div className="flex h-full">
             <Sidebar />
-            <ChannelList />
             <main className="flex flex-col w-full bg-white overflow-x-hidden overflow-y-auto mb-14">
               <div className="flex w-full mx-auto px-6 py-8">
                 <div className="flex flex-col w-full h-full text-gray-900 text-xl border-4 border-gray-900 border-dashed">
