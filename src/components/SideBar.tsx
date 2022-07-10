@@ -33,7 +33,7 @@ const Sidebar = () => {
                             </button>
                         </h2>
                         <div id="channelListAccordion" className="accordion-collapse collapse show" aria-labelledby="channelListTitle">
-                            <div className="accordion-body py-4 px-5">
+                            <div className="accordion-body py-4 px-5 flex-1 overflow-y-scroll max-h-96">
                                 <ChannelList />
                             </div>
                         </div>
