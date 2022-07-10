@@ -9,7 +9,7 @@ const Sidebar = () => {
     return (
         <>
             <nav className="flex flex-col w-72 lg:w-72 h-full items-center md:w-40">
-                <div className="flex flex-col w-full items-start my-5 border-b border-sky-500">
+                <div className="flex flex-col w-full items-start my-5 border-b border-slack-300">
                     <NewChannel />
                     <NewMessage />
                 </div>
@@ -24,8 +24,8 @@ const Sidebar = () => {
                                 w-full
                                 py-4
                                 px-5
-                                text-base text-gray-800 text-left
-                                bg-sky-100
+                                text-base text-white text-left
+                                bg-slack-500
                                 transition
                                 focus:outline-none
                                 " type="button" data-bs-toggle="collapse" data-bs-target="#channelListAccordion" aria-expanded="true" aria-controls="channelListAccordion">
@@ -49,8 +49,8 @@ const Sidebar = () => {
                                 w-full
                                 py-4
                                 px-5
-                                text-base text-gray-800 text-left
-                                bg-sky-100
+                                text-base text-white text-left
+                                bg-slack-500
                                 transition
                                 focus:outline-none
                                 " type="button" data-bs-toggle="collapse" data-bs-target="#directMessageAccordion" aria-expanded="false" aria-controls="directMessageAccordion">

@@ -8,7 +8,7 @@ import Sidebar from './SideBar'
 export default function MainPage() {
   return(
     <>
-      <div className="flex h-screen bg-sky-100">
+      <div className="flex h-screen bg-slack-500">
         <div className="flex-1 flex flex-col overflow-hidden">
           <Header />
           <div className="flex w-full h-full">

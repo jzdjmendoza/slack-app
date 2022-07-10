@@ -32,7 +32,7 @@ const LogInRegister = () => {
         fetch(endpoint, { method, headers , body })
             .then(response => {
                 setBusy(false)
-
+                
                 if(response.status == 200) {
                     setSession({
                         accessToken: response.headers.get('access-token'),
@@ -106,10 +106,6 @@ const LogInRegister = () => {
                         </form>
                         <form id="registerForm" className="register-form">
                             <h2 className="title">Register</h2>
-                            <div className="input-field">
-                                <i className="fas fa-user"></i>
-                                <input type="text" name="fullName" id="fullName" placeholder="Full Name" />
-                            </div>
                             <div className="input-field">
                                 <i className="fas fa-envelope"></i>
                                 <input type="email" name="email" id="email" placeholder="Email" onChange={event => setEmail(event.target.value)}/>

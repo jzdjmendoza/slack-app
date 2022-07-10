@@ -31,7 +31,7 @@ const ChannelList = () => {
 
   return(
     <div>
-      <ul>
+      <ul className='text-white'>
       {channels && channels.map(channel => {
         return <li key={channel.id}>{channel.name}</li>
       })}
