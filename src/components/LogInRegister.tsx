@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import SessionContext from "../contexts/SessionContext";
 import log from '../log.svg'
-import register from '../register.svg'
+import slack from '../slack-logo.png'
 
 const LogInRegister = () => {
 
@@ -130,9 +130,9 @@ const LogInRegister = () => {
                 <div className="panels-container">
                     <div className="panel left-panel">
                     <div className="content">
-                        <h3>New here ?</h3>
+                        <h3>Great teamwork starts with a <span id="catchPhrase">digital HQ.</span></h3>
                         <p>
-                        Create an account and experience a whole new world! We just need a few details about you.
+                        With all your people, tools and communication in one place, you can work faster and more flexibly than ever before.
                         </p>
                         <button className={"btn transparent "+ (isRegisterMode ? 'register-mode' : '') } id="register-btn" onClick={toggleForm}>
                         Register
@@ -150,7 +150,7 @@ const LogInRegister = () => {
                         Log In
                         </button>
                     </div>
-                    <img src={register} className="image" alt=""/>
+                    <img src={slack} className="image" alt=""/>
                     </div>
                 </div>
             </div>
