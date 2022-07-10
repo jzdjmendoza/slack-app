@@ -23,7 +23,7 @@ export default function NewChannel() {
         fetch(endpoint, { method, headers, body })
     }
     return (
-        <button onClick={newChannel} className="hover:bg-slack-300 p-2 w-full flex justify-start items-center" data-mdb-ripple="true" data-mdb-ripple-color="primary">
+        <button onClick={newChannel} className="hover:bg-slack-300 p-2 w-full flex justify-start items-center" data-mdb-ripple="true" data-mdb-ripple-color="light">
             <span className="rounded-lg bg-slack-300 px-2 py-1 mx-2">
                 <i className="fas fa-plus"></i>
             </span>

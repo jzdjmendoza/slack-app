@@ -15,10 +15,10 @@ const Header = () => {
                     <p className='mx-4 text-white'>{session.uid}</p>
                 </div>
                 <div>
-                    <p className='text-white font-bold text-2xl'>#general</p>
+                    <p className='text-white font-bold text-2xl'>#channelNameHere</p>
                 </div>
                 <div>
-                    <p className='text-white'>Members</p>
+                    <p className='text-white'>Members Here</p>
                 </div>
             </header>
         </>
