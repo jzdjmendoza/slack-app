@@ -22,7 +22,7 @@ const LogInRegister = () => {
     const login = (event: any) => {
         event.preventDefault()
 
-        const endpoint = 'http://localhost:3000/api/v1/auth/sign_in'
+        const endpoint = `${process.env.REACT_APP_SLACK_API_URL}/api/v1/auth/sign_in`
         const method = 'POST'
         const headers = { 'Content-Type': 'application/json' }
         const body = JSON.stringify({ email, password })
@@ -54,7 +54,7 @@ const LogInRegister = () => {
     const signup = (event: any) => {
         event.preventDefault()
 
-        const endpoint = 'http://localhost:3000/api/v1/auth'
+        const endpoint = `${process.env.REACT_APP_SLACK_API_URL}/api/v1/auth`
         const method = 'POST'
         const headers = { 'Content-Type': 'application/json' }
         const body = JSON.stringify({ email, password, password_confirmation: passwordConfirmation })
@@ -62,7 +62,7 @@ const LogInRegister = () => {
         fetch(endpoint, { method, headers , body })
             .then(response => {
                 if(response.status == 200) {
-                    const endpoint = 'https://cors-anywhere.herokuapp.com/206.189.91.54/api/v1/auth/sign_in'
+                    const endpoint = `${process.env.REACT_APP_SLACK_API_URL}/api/v1/auth/sign_in`
                     const method = 'POST'
                     const headers = { 'Content-Type': 'application/json' }
                     const body = JSON.stringify({ email, password })

@@ -8,7 +8,7 @@ const ChannelList = () => {
   const [channels, setChannels] = useState<any[]>([])
 
   const fetchChannels = async () => {
-    const endpoint = 'http://localhost:3000/api/v1/channels'
+    const endpoint = `${process.env.REACT_APP_SLACK_API_URL}/api/v1/channels`
     const method = 'GET'
     const headers = {
       'Content-Type': 'application/json',

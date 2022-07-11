@@ -10,7 +10,7 @@ export default function SendMessage() {
     const sendMessage = async (event: any) => {
         event.preventDefault()
 
-        const endpoint = 'http://localhost:3000/api/v1/messages'
+        const endpoint = `${process.env.REACT_APP_SLACK_API_URL}/api/v1/messages`
         const method = 'POST'
         const headers = {
           'Content-Type': 'application/json',

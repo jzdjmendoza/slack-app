@@ -9,7 +9,7 @@ const ChatWindow = () => {
   const [messages, setMessages] = useState<any[]>([])
 
   const fetchMessages = async () => {
-    const endpoint = `http://localhost:3000/api/v1/messages?receiver_id=${chat.id}&receiver_class=${chat.type}`
+    const endpoint = `${process.env.REACT_APP_SLACK_API_URL}/api/v1/messages?receiver_id=${chat.id}&receiver_class=${chat.type}`
     const method = 'GET'
     const headers = {
       'Content-Type': 'application/json',
