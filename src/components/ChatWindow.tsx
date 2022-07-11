@@ -41,7 +41,12 @@ const ChatWindow = () => {
             {messages.map(message => {
               return (
                 <div className="flex w-full max-w-xl h-60 items-center justify-center mx-auto bg-green-400 border-b border-gray-600">
-                  {message.body}
+                  <div>
+                    {message.sender.email}
+                  </div>
+                  <div>
+                    {message.body}
+                  </div>
                 </div>
               )
             })}
