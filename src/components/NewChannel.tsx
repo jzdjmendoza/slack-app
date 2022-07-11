@@ -1,6 +1,5 @@
 import { useContext } from "react"
 import SessionContext from "../contexts/SessionContext"
-import 'tw-elements';
 
 export default function NewChannel() {
     const { session } = useContext(SessionContext)

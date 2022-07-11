@@ -3,7 +3,6 @@ import '../App.css'
 import NewChannel from './NewChannel'
 import NewMessage from './NewMessage'
 import ChannelList from './ChannelList'
-import 'tw-elements';
 
 const Sidebar = () => {
     return (

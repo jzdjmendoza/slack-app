@@ -5,6 +5,7 @@ import LogInRegister from './components/LogInRegister'
 import MainPage from './components/MainPage'
 import SessionContext, { usePersistedSession } from './contexts/SessionContext'
 import { Session } from 'inspector';
+import 'tw-elements';
 
 function App() {
   const [session, setSession] = usePersistedSession(null)
