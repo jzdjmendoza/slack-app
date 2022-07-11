@@ -3,9 +3,12 @@ import '../App.css'
 import profile from '../profile-pic.jpg'
 import 'tw-elements'
 import SessionContext from "../contexts/SessionContext"
+import ChatContext from '../contexts/ChatContext'
 
 const Header = () => {
     const { session } = useContext(SessionContext)
+    const { chat } = useContext(ChatContext)
+
     return (
         <>
             {/* <header className="flex justify-between items-center bg-slack-900 p-4 border-none w-full">
@@ -172,7 +175,7 @@ const Header = () => {
                     </div>
                 </div>
                 <div>
-                    <p className='text-white font-bold text-2xl'>#channelNameHere</p>
+                    <p className='text-white font-bold text-2xl'>#{chat && chat.name}</p>
                 </div>
                 <div>
                     <p className='text-white'>Members Here</p>

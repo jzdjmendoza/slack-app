@@ -1,8 +1,10 @@
 import { useState, useContext, useEffect } from 'react'
+import ChatContext from '../contexts/ChatContext'
 import SessionContext from "../contexts/SessionContext"
 
 const ChannelList = () => {
   const { session } = useContext(SessionContext)
+  const { chat, setChat } = useContext(ChatContext)
   const [channels, setChannels] = useState<any[]>([])
 
   const fetchChannels = async () => {
@@ -26,6 +28,11 @@ const ChannelList = () => {
     const timer = setTimeout(() => {
       fetchChannels()
     }, 1000)
+
+    if(!chat && channels.length > 0) {
+      setChat({ id: channels[0].id, name: channels[0].name, type: 'Channel' })
+    }
+
     return () => clearTimeout(timer)
   }, [channels])
 
