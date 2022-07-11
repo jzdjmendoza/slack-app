@@ -24,6 +24,14 @@ const ChannelList = () => {
     setChannels(result.data)
   }
 
+  const selectChannel = (event: any) => {
+    setChat({
+      id: event.target.getAttribute('data-id'),
+      name: event.target.getAttribute('data-name'),
+      type: event.target.getAttribute('data-type')
+    })
+  }
+
   useEffect(() => {
     const timer = setTimeout(() => {
       fetchChannels()
@@ -40,7 +48,11 @@ const ChannelList = () => {
     <div>
       <ul className='text-white'>
       {channels && channels.map(channel => {
-        return <li key={channel.id}>{channel.name}</li>
+        return (
+          <li key={channel.id}>
+            <a href='#' data-id={channel.id} data-name={channel.name} data-type={'Channel'} onClick={selectChannel}>{channel.name}</a>
+          </li>
+        )
       })}
       </ul>
     </div>
