@@ -5,8 +5,8 @@ import SessionContext from "../contexts/SessionContext"
 import ChatContext from '../contexts/ChatContext'
 
 const Header = () => {
-    const { session} = useContext(SessionContext)
-    const { chat } = useContext(ChatContext)
+    const { session, setSession } = useContext(SessionContext)
+    const { chat, setChat } = useContext(ChatContext)
 
     return (
         <>
@@ -151,6 +151,7 @@ const Header = () => {
                                         hover:bg-gray-100
                                         "
                                     href="#"
+                                    onClick={event => { setSession(null); setChat(null) } }
                                 >
                                     Log out
                                 </a>
