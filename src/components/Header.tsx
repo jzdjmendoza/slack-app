@@ -5,7 +5,7 @@ import SessionContext from "../contexts/SessionContext"
 import ChatContext from '../contexts/ChatContext'
 
 const Header = () => {
-    const { session } = useContext(SessionContext)
+    const { session} = useContext(SessionContext)
     const { chat } = useContext(ChatContext)
 
     return (

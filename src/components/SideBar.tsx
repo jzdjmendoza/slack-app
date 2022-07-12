@@ -3,6 +3,7 @@ import '../App.css'
 import NewChannel from './NewChannel'
 import NewMessage from './NewMessage'
 import ChannelList from './ChannelList'
+import UserList from './UserList'
 
 const Sidebar = () => {
     return (
@@ -58,6 +59,7 @@ const Sidebar = () => {
                         </h2>
                         <div id="directMessageAccordion" className="accordion-collapse collapse" aria-labelledby="directMessageTitle">
                             <div className="accordion-body py-4 px-5">
+                                <UserList />
                             </div>
                         </div>
                     </div>
