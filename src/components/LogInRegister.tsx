@@ -34,7 +34,7 @@ const LogInRegister = () => {
         fetch(endpoint, { method, headers , body })
             .then(response => {
                 setBusy(false)
-                
+                console.log(response.headers.get('data'))
                 if(response.status == 200) {
                     setSession({
                         accessToken: response.headers.get('access-token'),

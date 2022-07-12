@@ -1,3 +1,4 @@
+import { channel } from 'diagnostics_channel'
 import { useState, useContext, useEffect } from 'react'
 import ChatContext from '../contexts/ChatContext'
 import SessionContext from "../contexts/SessionContext"
@@ -22,7 +23,7 @@ const ChannelList = () => {
     const result = await response.json()
 
     setChannels(result.data)
-  }
+  } 
 
   const selectChannel = (event: any) => {
     setChat({

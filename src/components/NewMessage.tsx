@@ -24,17 +24,17 @@ export default function NewMessage() {
 
     return (
         <>
-            <button className="hover:bg-slack-300 p-2 w-full flex justify-start items-center mb-5 transition duration-150 ease-in-out" data-bs-toggle="modal" data-bs-target="#exampleModalCenter" data-mdb-ripple="true" data-mdb-ripple-color="light">
+            <button className="hover:bg-slack-300 p-2 w-full flex justify-start items-center mb-5 transition duration-150 ease-in-out" data-bs-toggle="modal" data-bs-target="#newMessageModal" data-mdb-ripple="true" data-mdb-ripple-color="light">
                 <span className="rounded-lg bg-slack-300 px-2 py-1 mx-2">
                     <i className="fas fa-plus"></i>
                 </span>
                 <span className='text-white'>New Message</span>
             </button>
-            <div className="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto" id="exampleModalCenter" aria-labelledby="exampleModalCenterTitle" aria-modal="true" role="dialog">
+            <div className="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto" id="newMessageModal" aria-labelledby="newMessageModalTitle" aria-modal="true" role="dialog">
                 <div className="modal-dialog modal-dialog-centered relative w-auto pointer-events-none">
                     <div className="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
                         <div className="modal-header flex flex-shrink-0 items-center justify-between p-4 border-b bg-slack-900 rounded-t-md">
-                            <h5 className="text-xl font-medium leading-normal text-white" id="exampleModalScrollableLabel">
+                            <h5 className="text-xl font-medium leading-normal text-white">
                                 Direct Message
                             </h5>
                             <button type="button"
@@ -49,8 +49,7 @@ export default function NewMessage() {
                             <label>Messsage:</label>
                             <textarea className='w-full border-2 rounded-md p-1'></textarea>
                         </div>
-                        <div
-                            className="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
+                        <div className="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
                             <button type="button"
                                 className="inline-block px-6 py-2.5 bg-slack-300 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-slack-900 hover:shadow-lg focus:bg-slack-500 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-slack-300 active:shadow-lg transition duration-150 ease-in-out ml-1 flex">
                                 <span className="font-bold text-base">Send</span>
