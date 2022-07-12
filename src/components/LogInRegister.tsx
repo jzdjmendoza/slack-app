@@ -9,6 +9,7 @@ const LogInRegister = () => {
     const [isRegisterMode, setIsRegisterMode] = useState(false);
     const toggleForm = () => {
         setIsRegisterMode(!isRegisterMode);
+        setErrors('')
     }
 
     const [email, setEmail] = useState('')
@@ -16,6 +17,7 @@ const LogInRegister = () => {
     const [passwordConfirmation, setPasswordConfirmation] = useState('')
     const [errors, setErrors] = useState('')
     const [busy, setBusy] = useState(false)
+    const [isEmailValid, setEmailValid] = useState(true)
 
     const { session, setSession } = useContext(SessionContext)
 
@@ -40,8 +42,12 @@ const LogInRegister = () => {
                         uid: response.headers.get('uid'),
                         expiry: response.headers.get('expiry')
                     })
-                } else {
-                    setErrors('*User not found')
+                } else {         
+                    response.json()
+                        .then(data => {
+                            setErrors(data.errors.join('. '))
+                        })           
+                    
                 }
             })
             .catch(error => {
@@ -68,20 +74,22 @@ const LogInRegister = () => {
                     const body = JSON.stringify({ email, password })
             
                     fetch(endpoint, { method, headers , body })
-                    .then(response => {
-                        if(response.status == 200) {
-                            setSession({
-                                accessToken: response.headers.get('access-token'),
-                                client: response.headers.get('client'),
-                                uid: response.headers.get('uid'),
-                                expiry: response.headers.get('expiry')
-                            })
-                        } else {
-                            //Put Error Message
-                        }
-                    })
+                        .then(response => {
+                            if(response.status == 200) {
+                                setSession({
+                                    accessToken: response.headers.get('access-token'),
+                                    client: response.headers.get('client'),
+                                    uid: response.headers.get('uid'),
+                                    expiry: response.headers.get('expiry')
+                                })
+                            } else {
+                            }
+                        })
                 } else {
-                    //Put Error Message
+                    response.json()
+                        .then(data => {
+                            setErrors(data.errors.full_messages.join('. '))
+                        })
                 }
             })
     }
@@ -118,6 +126,7 @@ const LogInRegister = () => {
                                 <i className="fas fa-lock"></i>
                                 <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password"onChange={event => setPasswordConfirmation(event.target.value)}/>
                             </div>
+                            {errors ? <p className="text-rose-500">{errors}</p> : null}
                             <button type="submit" className="btn solid" value="Register" onClick={signup}>Register</button>
                         </form>
                     </div>
