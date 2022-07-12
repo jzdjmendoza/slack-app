@@ -58,7 +58,7 @@ const Sidebar = () => {
                             </button>
                         </h2>
                         <div id="directMessageAccordion" className="accordion-collapse collapse" aria-labelledby="directMessageTitle">
-                            <div className="accordion-body py-4 px-5">
+                            <div className="accordion-body py-4 px-5 flex-1 overflow-y-scroll max-h-96">
                                 <UserList />
                             </div>
                         </div>
