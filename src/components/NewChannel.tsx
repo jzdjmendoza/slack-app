@@ -5,15 +5,20 @@ import { components } from "react-select"
 
 export default function NewChannel() {
     const { session } = useContext(SessionContext)
-    const [channelName, setChannelName] = useState('')
+    const [ channelName, setChannelName ] = useState('')
     const [ users, setUsers ] = useState([{ label: '', value: ''}])
-    const [optionSelected, setOptionSelected] = useState(null)
+    const [ optionSelected, setOptionSelected ] = useState(null)
     const [ userIds, setUserIds ] = useState<any[]>([])
     const [ user, setUser ] = useState({ label: '', value: ''})
+    const [ showModal, setShowModal ] = useState(false);
 
     interface User {
         email: string;
         id: number;
+    }
+
+    const toggleModal = () => {
+        setShowModal(!showModal)
     }
 
     const newChannel = (event: any) => {
@@ -42,6 +47,8 @@ export default function NewChannel() {
         .catch(error => {
             console.log(error)
         })
+
+        setShowModal(false);
     }
 
     const fetchUsers = async () => {
@@ -91,7 +98,7 @@ export default function NewChannel() {
 
     return (
         <>
-            <button className="hover:bg-slack-300 p-2 w-full flex justify-start items-center transition duration-150 ease-in-out" data-bs-toggle="modal" data-bs-target="#newChannelModal" data-mdb-ripple="true" data-mdb-ripple-color="light">
+            <button className="hover:bg-slack-300 p-2 w-full flex justify-start items-center transition duration-150 ease-in-out" data-bs-toggle="modal" onClick={toggleModal} data-bs-target="#newChannelModal" data-mdb-ripple="true" data-mdb-ripple-color="light">
                 <span className="rounded-lg bg-slack-300 px-2 py-1 mx-2">
                     <i className="fas fa-plus"></i>
                 </span>
@@ -106,7 +113,7 @@ export default function NewChannel() {
                             </h5>
                             <button type="button"
                                 className="btn-close box-content w-4 h-4 p-1 text-white border-none rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-white hover:opacity-75 hover:no-underline"
-                                data-bs-dismiss="modal" aria-label="Close"></button>
+                                onClick={toggleModal} data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div className="modal-body relative p-4">
                             <label>Channel Name</label>
@@ -135,7 +142,7 @@ export default function NewChannel() {
                         </div>
                         <div className="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
                             <button type="button"
-                                className="inline-block px-6 py-2.5 bg-slack-300 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-slack-900 hover:shadow-lg focus:bg-slack-500 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-slack-300 active:shadow-lg transition duration-150 ease-in-out ml-1 flex" onClick={newChannel}>
+                                className="inline-block px-6 py-2.5 bg-slack-300 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-slack-900 hover:shadow-lg focus:bg-slack-500 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-slack-300 active:shadow-lg transition duration-150 ease-in-out ml-1 flex" onClick={newChannel} data-bs-dismiss="modal">
                                 <span className="font-bold text-base">Create</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-6 w-6 ml-2 transform rotate-90 md:h-4">
                                     <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path>
