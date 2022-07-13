@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from 'react'
+import { useState, useContext, useEffect, useRef } from 'react'
 import SendMessage from "./SendMessage"
 import SessionContext from '../contexts/SessionContext'
 import ChatContext from '../contexts/ChatContext'
@@ -7,6 +7,7 @@ const ChatWindow = () => {
   const { session } = useContext(SessionContext)
   const { chat } = useContext(ChatContext)
   const [messages, setMessages] = useState<any[]>([])
+  const scrollRef = useRef<null | HTMLDivElement>(null);
 
   const fetchMessages = async () => {
     const endpoint = `${process.env.REACT_APP_SLACK_API_URL}/api/v1/messages?receiver_id=${chat.id}&receiver_class=${chat.type}`
@@ -30,16 +31,19 @@ const ChatWindow = () => {
       fetchMessages()
     }, 1000)
 
+    scrollRef.current?.scrollIntoView({behavior: 'smooth', block: 'end', inline: 'end'})
+
     return () => clearTimeout(timer)
   }, [messages])
 
+
   return (
     <div className="flex flex-col w-full">
-      <main className="flex-1 overflow-y-scroll bg-white">
+      <main className="flex-1 overflow-y-scroll bg-white mb-4 scrollbar">
         <div className="flex flex-col mx-auto py-8">
-          <div className="flex flex-col h-full text-gray-900 text-xl mx-12">
+          <div className="flex flex-col h-full text-gray-900 text-xl mx-12" ref={scrollRef}>
             {messages.map(message => {
-              let initial = (JSON.stringify(message.sender.email)[1]).toUpperCase()
+              const initial = (JSON.stringify(message.sender.email)[1]).toUpperCase()
               return (
                 <div className="flex w-full max-w-7xl hover:bg-slate-100 items-center justify-start my-2">
                   <div className='mr-5 flex items-center hover:bg-slate-100 justify-center'>
