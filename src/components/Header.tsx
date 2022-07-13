@@ -111,46 +111,6 @@ const Header = () => {
                                         hover:bg-gray-100
                                         "
                                     href="#"
-                                >
-                                    Set nickname
-                                </a>
-                            </li>
-                            <li>
-                                <a
-                                    className="
-                                        dropdown-item
-                                        text-sm
-                                        py-2
-                                        px-4
-                                        font-normal
-                                        block
-                                        w-full
-                                        whitespace-nowrap
-                                        bg-transparent
-                                        text-gray-700
-                                        hover:bg-gray-100
-                                        "
-                                    href="#"
-                                >
-                                    Change profile picture
-                                </a>
-                            </li>
-                            <li>
-                                <a
-                                    className="
-                                        dropdown-item
-                                        text-sm
-                                        py-2
-                                        px-4
-                                        font-normal
-                                        block
-                                        w-full
-                                        whitespace-nowrap
-                                        bg-transparent
-                                        text-gray-700
-                                        hover:bg-gray-100
-                                        "
-                                    href="#"
                                     onClick={event => { setSession(null); setChat(null) } }
                                 >
                                     Log out
