@@ -36,16 +36,22 @@ const ChatWindow = () => {
   return (
     <div className="flex flex-col w-full">
       <main className="flex-1 overflow-y-scroll bg-white">
-        <div className="flex flex-col w-full mx-auto px-6 py-8">
-          <div className="flex flex-col w-full h-full text-gray-900 text-xl border-4 border-slack-500 border-dashed">
+        <div className="flex flex-col mx-auto py-8">
+          <div className="flex flex-col h-full text-gray-900 text-xl mx-12">
             {messages.map(message => {
+              let initial = (JSON.stringify(message.sender.email)[1]).toUpperCase()
               return (
-                <div className="flex w-full max-w-xl h-60 items-center justify-center mx-auto bg-green-400 border-b border-gray-600">
-                  <div>
-                    {message.sender.email}
+                <div className="flex w-full max-w-7xl hover:bg-slate-100 items-center justify-start my-2">
+                  <div className='mr-5 flex items-center hover:bg-slate-100 justify-center'>
+                    <span className='p-1 px-3 bg-slack-300 rounded-full font-bold text-white'>{initial}</span>
                   </div>
-                  <div>
-                    {message.body}
+                  <div className='flex flex-col'>
+                    <div className='text-base font-bold flex flex-wrap'>
+                      {message.sender.email}
+                    </div>
+                    <div className='flex flex-wrap'>
+                      {message.body}
+                    </div>
                   </div>
                 </div>
               )
