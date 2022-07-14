@@ -25,7 +25,7 @@ export default function NewMessage() {
     return (
         <>
             <button className="hover:bg-slack-300 p-2 w-full flex justify-start items-center mb-5 transition duration-150 ease-in-out" data-bs-toggle="modal" data-bs-target="#newMessageModal" data-mdb-ripple="true" data-mdb-ripple-color="light">
-                <span className="rounded-lg bg-slack-300 px-2 py-1 mx-2">
+                <span className="rounded-lg text-white bg-slack-300 px-2 py-1 mx-2">
                     <i className="fas fa-plus"></i>
                 </span>
                 <span className='text-white'>New Message</span>

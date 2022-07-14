@@ -29,7 +29,7 @@ const ChatWindow = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       fetchMessages()
-    }, 1000)
+    }, 500)
 
     scrollRef.current?.scrollIntoView({behavior: 'smooth', block: 'end', inline: 'end'})
 

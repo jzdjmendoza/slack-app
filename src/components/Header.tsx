@@ -3,6 +3,7 @@ import '../App.css'
 import profile from '../profile-pic.jpg'
 import SessionContext from "../contexts/SessionContext"
 import ChatContext from '../contexts/ChatContext'
+import ChannelDetails from './ChannelDetails'
 
 const Header = () => {
     const { session, setSession } = useContext(SessionContext)
@@ -123,7 +124,7 @@ const Header = () => {
                     <p className='text-white font-bold text-2xl'>#{chat && chat.name}</p>
                 </div>
                 <div>
-                    <p className='text-white'>Members Here</p>
+                    <ChannelDetails />
                 </div>
             </div>
         </>
