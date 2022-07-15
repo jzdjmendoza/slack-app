@@ -124,7 +124,7 @@ const Header = () => {
                     <p className='text-white font-bold text-2xl'>#{chat && chat.name}</p>
                 </div>
                 <div>
-                    <ChannelDetails />
+                    {chat.type === 'Channel' ? <ChannelDetails /> : null}
                 </div>
             </div>
         </>

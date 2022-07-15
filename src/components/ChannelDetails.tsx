@@ -2,10 +2,13 @@ import { useContext, useEffect, useState } from "react"
 import SessionContext from "../contexts/SessionContext"
 import { default as ReactSelect } from "react-select";
 import { components } from "react-select"
+import ChatContext from "../contexts/ChatContext";
 
 
 export default function ChannelDetails() {
     const { session } = useContext(SessionContext)
+    const { chat } = useContext(ChatContext)
+    const [ channel, setChannel ] = useState<any>({ channel_members: [] })
     const [ users, setUsers ] = useState([{ label: '', value: ''}])
     const [ optionSelected, setOptionSelected ] = useState(null)
     const [ userIds, setUserIds ] = useState<any[]>([])
@@ -15,6 +18,23 @@ export default function ChannelDetails() {
     interface User {
         email: string;
         id: number;
+    }
+
+    const fetchChannel = async () => {
+        const endpoint = `${process.env.REACT_APP_SLACK_API_URL}/api/v1/channels/${chat.id}`
+        const method = 'GET'
+        const headers = {
+            'Content-Type': 'application/json',
+            'expiry': session.expiry,
+            'uid': session.uid,
+            'access-token': session.accessToken,
+            'client': session.client
+        }
+        
+        const response = await fetch(endpoint, { method, headers })
+        const result = await response.json()
+
+        setChannel(result.data)
     }
 
     const fetchUsers = async () => {
@@ -34,13 +54,13 @@ export default function ChannelDetails() {
                         value: user.id,
                         label: user.email,
                      }))
-        setUsers(data)
-        return users
+        setUsers(data.sort((a: any, b: any) => { return a.label < b.label ? -1 : 1 }))
     }
 
     useEffect(() => {
+        fetchChannel()
         fetchUsers()
-    })
+    }, [])
 
     const Option = (props: any) => {
         return (
@@ -109,6 +129,15 @@ export default function ChannelDetails() {
                         </div>
                         <div className="modal-body relative p-4">
                             <p>Members in the Channel:</p>
+                            <ul>
+                                {channel.channel_members.map((member: any) => {
+                                    const user = users.find((user: any) => { return user.value === member.user_id })
+
+                                    return (
+                                        <li>{user && user.label}</li>
+                                    )
+                                })}
+                            </ul>
                         </div>
                     </div>
                 </div>

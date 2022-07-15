@@ -75,7 +75,7 @@ export default function NewChannel() {
 
     useEffect(() => {
         fetchUsers()
-    })
+    }, [])
 
     const Option = (props: any) => {
         return (
