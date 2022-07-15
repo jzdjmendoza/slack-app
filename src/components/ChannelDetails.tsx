@@ -12,12 +12,34 @@ export default function ChannelDetails() {
     const [ users, setUsers ] = useState([{ label: '', value: ''}])
     const [ optionSelected, setOptionSelected ] = useState(null)
     const [ userIds, setUserIds ] = useState<any[]>([])
+    const [ selectedUserId, setSelectedUserId ] = useState(null)
     const [ user, setUser ] = useState({ label: '', value: ''})
     const [ showModal, setShowModal ] = useState(false);
 
     interface User {
         email: string;
         id: number;
+    }
+
+    const addMember = async (event: any) => {
+        const endpoint = `${process.env.REACT_APP_SLACK_API_URL}/api/v1/channel/add_member`
+        const method = 'POST'
+        const headers = {
+            'Content-Type': 'application/json',
+            'expiry': session.expiry,
+            'uid': session.uid,
+            'access-token': session.accessToken,
+            'client': session.client
+        }
+        const body = JSON.stringify({
+            id: chat.id,
+            member_id: selectedUserId
+        })
+
+        const response = await fetch(endpoint, { method, headers })
+        const result = await response.json()
+
+        await fetchChannel()
     }
 
     const fetchChannel = async () => {
@@ -78,8 +100,9 @@ export default function ChannelDetails() {
     }
 
     const handleChange = (selected: any) => {
+        setSelectedUserId(selected.value)
         setOptionSelected(selected)
-        setUserIds(selected.map((data: any) => data.value))
+        // setUserIds(selected.map((data: any) => data.value))
     }
 
     return (
@@ -107,7 +130,7 @@ export default function ChannelDetails() {
                                 data-content="Please selecet account(s)"
                             >
                                 <ReactSelect
-                                    options={users}
+                                    options={users.filter(user => !channel.channel_members.some((member: any) => member.user_id === user.value))}
                                     closeMenuOnSelect={false}
                                     hideSelectedOptions={false}
                                     components={{
@@ -120,7 +143,8 @@ export default function ChannelDetails() {
                         </div>
                         <div className="flex flex-shrink-0 flex-wrap items-center justify-end p-4 rounded-b-md">
                             <button type="button"
-                                className="inline-block px-6 py-2.5 bg-slack-300 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-slack-900 hover:shadow-lg focus:bg-slack-500 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-slack-300 active:shadow-lg transition duration-150 ease-in-out ml-1 flex justify-center">
+                                className="inline-block px-6 py-2.5 bg-slack-300 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-slack-900 hover:shadow-lg focus:bg-slack-500 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-slack-300 active:shadow-lg transition duration-150 ease-in-out ml-1 flex justify-center"
+                                onClick={addMember}>
                                 <span className="rounded-lg px-2 py-1">
                                     <i className="fas fa-plus"></i>
                                 </span>
