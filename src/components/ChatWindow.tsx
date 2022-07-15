@@ -53,7 +53,7 @@ const ChatWindow = () => {
                     <div className='text-base font-bold flex flex-wrap'>
                       {message.sender.email}
                     </div>
-                    <div className='flex flex-wrap'>
+                    <div className='flex flex-wrap text-xs font-sans font-thin'>
                       {(new Date(message.created_at)).toLocaleString()}
                     </div>
                     <div className='flex flex-wrap'>
