@@ -9,6 +9,12 @@ const Header = () => {
     const { session, setSession } = useContext(SessionContext)
     const { chat, setChat } = useContext(ChatContext)
 
+    const logout = (event: any) => {
+        setSession(null)
+        setChat(null)
+        localStorage.setItem('chat', JSON.stringify(null))
+    }
+
     return (
         <>
             <div className="flex justify-between items-center bg-slack-900 p-2 border-none w-full">
@@ -112,7 +118,7 @@ const Header = () => {
                                         hover:bg-gray-100
                                         "
                                     href="#"
-                                    onClick={event => { setSession(null); setChat(null) } }
+                                    onClick={logout}
                                 >
                                     Log out
                                 </a>
@@ -124,7 +130,7 @@ const Header = () => {
                     <p className='text-white font-bold text-2xl'>#{chat && chat.name}</p>
                 </div>
                 <div>
-                    {chat.type === 'Channel' ? <ChannelDetails /> : null}
+                    {chat && chat.type === 'Channel' ? <ChannelDetails /> : null}
                 </div>
             </div>
         </>

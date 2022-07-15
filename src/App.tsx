@@ -6,9 +6,11 @@ import MainPage from './components/MainPage'
 import SessionContext, { usePersistedSession } from './contexts/SessionContext'
 import { Session } from 'inspector';
 import 'tw-elements';
+import { usePersistedChat } from './contexts/ChatContext';
 
 function App() {
   const [session, setSession] = usePersistedSession(null)
+  const [chat, setChat] = usePersistedChat(null)
 
   useEffect(() => {
     console.log(session)

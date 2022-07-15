@@ -38,7 +38,7 @@ const ChannelList = () => {
       fetchChannels()
     }, 1000)
 
-    if(!chat && channels.length > 0) {
+    if(!chat && channels && channels.length > 0) {
       setChat({ id: channels[0].id, name: channels[0].name, type: 'Channel' })
     }
 

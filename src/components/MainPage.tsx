@@ -18,7 +18,7 @@ export default function MainPage() {
           <Header />
           <div className="flex w-full h-full">
             <Sidebar />
-            <ChatWindow />
+            {chat ? <ChatWindow /> : null}
           </div>
           
         </div>
