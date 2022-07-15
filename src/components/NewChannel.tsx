@@ -3,7 +3,7 @@ import SessionContext from "../contexts/SessionContext"
 import { default as ReactSelect } from "react-select";
 import { components } from "react-select"
 
-export default function NewChannel() {
+export default function NewChannel(props: any) {
     const { session } = useContext(SessionContext)
     const [ channel, setChannel ] = useState<any>({ channel_members: [] })
     const [ channelName, setChannelName ] = useState('')
@@ -12,6 +12,7 @@ export default function NewChannel() {
     const [ userIds, setUserIds ] = useState<any[]>([])
     const [ user, setUser ] = useState({ label: '', value: ''})
     const [ showModal, setShowModal ] = useState(false);
+    const { channels, setChannels, fetchChannels } = props
 
     interface User {
         email: string;
@@ -38,15 +39,22 @@ export default function NewChannel() {
         const body = JSON.stringify({ name: channelName, user_ids: userIds })
 
         fetch(endpoint, { method, headers, body })
-        .then(response => {  
+        .then((response) => {  
             if(response.status == 200) {
-                console.log('passed')
+                return response.json();
                 //update channels state, add the new channel
             } else {
                 console.log('failed')
             }
         })
-        .catch(error => {
+        .then((data) => {
+            console.log('passed');
+            console.log(data);
+            const newChannels = [...channels];
+            newChannels.push(data)
+            setChannels(newChannels);
+        })
+        .catch((error) => {
             console.log(error)
         })
 
@@ -64,15 +72,29 @@ export default function NewChannel() {
             'client': session.client
         }
         
-        const response = await fetch(endpoint, { method, headers })
-        const result = await response.json()
-        const data = result.data.map((user: User) => ({
-                        value: user.id,
-                        label: user.email,
-                     }))
-        setUsers(data.sort((a: any, b: any) => { return a.label < b.label ? -1 : 1 }))
-        return users
-        
+        await fetch(endpoint, { method, headers })
+        .then((response) => {
+            if(response.status == 200){
+                return response.json()
+            }
+        })
+        .then((result) => {
+            const data = result.data.map((user: User) => ({
+                value: user.id,
+                label: user.email,
+             }))
+             setUsers(data.sort((a: any, b: any) => { return a.label < b.label ? -1 : 1 }))
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+        // const result = await response.json()
+        // const data = result.data.map((user: User) => ({
+                        // value: user.id,
+                        // label: user.email,
+                    //  }))
+        // setUsers(data)
+        // return users
     }
 
     useEffect(() => {

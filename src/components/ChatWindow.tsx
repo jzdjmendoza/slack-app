@@ -2,14 +2,16 @@ import { useState, useContext, useEffect, useRef } from 'react'
 import SendMessage from "./SendMessage"
 import SessionContext from '../contexts/SessionContext'
 import ChatContext from '../contexts/ChatContext'
+import { MessageContext, MessageContextType } from '../contexts/MessageContext'
 
 const ChatWindow = () => {
   const { session } = useContext(SessionContext)
   const { chat } = useContext(ChatContext)
-  const [messages, setMessages] = useState<any[]>([])
+  const { messages, setMessages } = useContext(MessageContext) as MessageContextType
+  const [ toggleMessage, setToggleMessage ] = useState(false);
   const scrollRef = useRef<null | HTMLDivElement>(null);
 
-  const fetchMessages = async () => {
+  const fetchMessages = () => {
     const endpoint = `${process.env.REACT_APP_SLACK_API_URL}/api/v1/messages?receiver_id=${chat.id}&receiver_class=${chat.type}`
     const method = 'GET'
     const headers = {
@@ -20,21 +22,28 @@ const ChatWindow = () => {
       'client': session.client
     }
     
-    const response = await fetch(endpoint, { method, headers })
-    const result = await response.json()
-
-    setMessages(result.data)
+    fetch(endpoint, { method, headers })
+    .then((response) => {
+        if(response.status === 200){
+            return response.json();
+        }
+    })
+    .then((result) => {
+      setMessages(result.data)
+    })
+    .catch((error) => {
+        console.log('Error')
+    })
   }
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      fetchMessages()
-    }, 500)
-
+    chat && fetchMessages()
     scrollRef.current?.scrollIntoView({behavior: 'smooth', block: 'end', inline: 'end'})
+  }, [messages, toggleMessage])
 
-    return () => clearTimeout(timer)
-  }, [messages])
+  useEffect(() => {
+    chat && fetchMessages()
+  })
 
 
   return (
@@ -42,10 +51,10 @@ const ChatWindow = () => {
       <main className="flex-1 overflow-y-scroll bg-white mb-4 scrollbar">
         <div className="flex flex-col mx-auto py-8">
           <div className="flex flex-col h-full text-gray-900 text-xl mx-12" ref={scrollRef}>
-            {messages.map(message => {
+            {messages && messages.map((message, index) => {
               const initial = (JSON.stringify(message.sender.email)[1]).toUpperCase()
               return (
-                <div className="flex w-full max-w-7xl hover:bg-slate-100 items-center justify-start my-2">
+                <div key={'message_'+message.id} className="flex w-full max-w-7xl hover:bg-slate-100 items-center justify-start my-2">
                   <div className='mr-5 flex items-center hover:bg-slate-100 justify-center'>
                     <span className='p-1 px-3 bg-slack-300 rounded-full font-bold text-white'>{initial}</span>
                   </div>
@@ -67,7 +76,7 @@ const ChatWindow = () => {
         </div>
       </main>
       <div className="w-full items-center text-center px-6 py-0 mb-12 sticky bottom-0 bg-white">
-        <SendMessage />
+        <SendMessage toggleMessage={toggleMessage} setToggleMessage={setToggleMessage}/>
       </div>
     </div>
   )

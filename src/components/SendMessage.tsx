@@ -1,13 +1,15 @@
 import { useState, useContext } from "react"
 import ChatContext from "../contexts/ChatContext"
+import { MessageContext, MessageContextType } from "../contexts/MessageContext"
 import SessionContext from "../contexts/SessionContext"
 
-export default function SendMessage() {
+export default function SendMessage(props: any) {
     const { session } = useContext(SessionContext)
     const { chat } = useContext(ChatContext)
     const [message, setMessage] = useState('')
+    const { toggleMessage, setToggleMessage } = props
 
-    const sendMessage = async (event: any) => {
+    const sendMessage = (event: any) => {
         event.preventDefault()
 
         const endpoint = `${process.env.REACT_APP_SLACK_API_URL}/api/v1/messages`
@@ -25,14 +27,30 @@ export default function SendMessage() {
             body: message
         })
         
-        const response = await fetch(endpoint, { method, headers, body })
-        const result = await response.json()
-
-        setMessage('')
+        fetch(endpoint, { method, headers, body })
+        .then((response) => {
+            if(response.status == 200) {
+                return response.json();
+                //update channels state, add the new channel
+            } else {
+                console.log('failed')
+            }
+        })
+        .then((data) => {
+            console.log('sent message');
+            console.log(data)
+            setToggleMessage(!toggleMessage)
+            setMessage('')
+            // setMessages([ ...messages, data]);
+        })
+        .catch((error) => {
+            console.log(error)
+        })
     }
 
     const enterMessage = (event: any) => {
         if (event.key === 'Enter') {
+            console.log('pressed enter')
             sendMessage(event)
         }
     }
