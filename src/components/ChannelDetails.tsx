@@ -36,7 +36,7 @@ export default function ChannelDetails() {
             member_id: selectedUserId
         })
 
-        const response = await fetch(endpoint, { method, headers })
+        const response = await fetch(endpoint, { method, headers, body })
         const result = await response.json()
 
         await fetchChannel()
