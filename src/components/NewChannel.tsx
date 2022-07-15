@@ -5,6 +5,7 @@ import { components } from "react-select"
 
 export default function NewChannel() {
     const { session } = useContext(SessionContext)
+    const [ channel, setChannel ] = useState<any>({ channel_members: [] })
     const [ channelName, setChannelName ] = useState('')
     const [ users, setUsers ] = useState([{ label: '', value: ''}])
     const [ optionSelected, setOptionSelected ] = useState(null)
@@ -69,8 +70,9 @@ export default function NewChannel() {
                         value: user.id,
                         label: user.email,
                      }))
-        setUsers(data)
+        setUsers(data.sort((a: any, b: any) => { return a.label < b.label ? -1 : 1 }))
         return users
+        
     }
 
     useEffect(() => {
@@ -129,7 +131,7 @@ export default function NewChannel() {
                                 data-content="Please selecet account(s)"
                             >
                                 <ReactSelect
-                                    options={users}
+                                    options={users.filter(user => !channel.channel_members.some((member: any) => member.user_id === user.value))}
                                     isMulti
                                     closeMenuOnSelect={false}
                                     hideSelectedOptions={false}
