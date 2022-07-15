@@ -37,19 +37,15 @@ const ChatWindow = () => {
   }
 
   useEffect(() => {
+    console.log('use effect chat window')
     chat && fetchMessages()
     scrollRef.current?.scrollIntoView({behavior: 'smooth', block: 'end', inline: 'end'})
   }, [messages, toggleMessage])
 
-  useEffect(() => {
-    chat && fetchMessages()
-  })
-
-
   return (
-    <div className="flex flex-col w-full">
-      <main className="flex-1 overflow-y-scroll bg-white mb-4 scrollbar">
-        <div className="flex flex-col mx-auto py-8">
+    <div className="flex flex-col w-full bg-white">
+      <main className="flex-1 overflow-y-scroll bg-white mb-4 scrollbar h-full">
+        <div className="flex flex-col mx-auto my-20 min-h-full">
           <div className="flex flex-col h-full text-gray-900 text-xl mx-12" ref={scrollRef}>
             {messages && messages.map((message, index) => {
               const initial = (JSON.stringify(message.sender.email)[1]).toUpperCase()
@@ -75,7 +71,7 @@ const ChatWindow = () => {
           </div>
         </div>
       </main>
-      <div className="w-full items-center text-center px-6 py-0 mb-12 sticky bottom-0 bg-white">
+      <div className="w-full items-center text-center px-6 mb-12 sticky bottom-0 bg-white">
         <SendMessage toggleMessage={toggleMessage} setToggleMessage={setToggleMessage}/>
       </div>
     </div>

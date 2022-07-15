@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react'
 import '../App.css'
 import NewChannel from './NewChannel'
-import NewMessage from './NewMessage'
 import ChannelList from './ChannelList'
 import UserList from './UserList'
 import SessionContext from '../contexts/SessionContext'
@@ -12,10 +11,9 @@ const Sidebar = () => {
 
     return (
         <>
-            <nav className="flex flex-col w-72 lg:w-72 h-full items-center md:w-40">
-                <div className="flex flex-col w-full items-start my-5 border-b border-slack-300">
+            <nav className="flex flex-col max-w-72 w-72 lg:w-72 h-full items-center md:w-40">
+                <div className="flex flex-col w-full items-start my-5 pb-5 border-b border-slack-300">
                     <NewChannel  channels={channels} setChannels={setChannels}/>
-                    <NewMessage />
                 </div>
                 <div className="accordion w-full">
                     <div className="accordion-item">
@@ -37,7 +35,7 @@ const Sidebar = () => {
                             </button>
                         </h2>
                         <div id="channelListAccordion" className="accordion-collapse collapse show" aria-labelledby="channelListTitle">
-                            <div className="accordion-body py-4 px-5 flex-1 overflow-y-scroll max-h-96">
+                            <div className="accordion-body py-4 px-5 flex-1 overflow-y-scroll max-h-96 scrollbar">
                                 <ChannelList channels={channels} setChannels={setChannels} />
                             </div>
                         </div>
@@ -62,7 +60,7 @@ const Sidebar = () => {
                             </button>
                         </h2>
                         <div id="directMessageAccordion" className="accordion-collapse collapse" aria-labelledby="directMessageTitle">
-                            <div className="accordion-body py-4 px-5 flex-1 overflow-y-scroll max-h-96">
+                            <div className="accordion-body py-4 px-5 flex-1 overflow-y-scroll max-h-96 max-w-min scrollbar">
                                 <UserList />
                             </div>
                         </div>

@@ -129,7 +129,8 @@ export default function ChannelDetails() {
                                 data-trigger="focus"
                                 data-content="Please selecet account(s)"
                             >
-                                <ReactSelect
+                                { channel && channel.channel_members ?
+                                    <ReactSelect
                                     options={users.filter(user => !channel.channel_members.some((member: any) => member.user_id === user.value))}
                                     closeMenuOnSelect={false}
                                     hideSelectedOptions={false}
@@ -138,7 +139,8 @@ export default function ChannelDetails() {
                                     }}
                                     onChange={handleChange}
                                     value={optionSelected}
-                                />
+                                    /> : null}
+                                
                             </span>
                         </div>
                         <div className="flex flex-shrink-0 flex-wrap items-center justify-end p-4 rounded-b-md">
@@ -154,7 +156,7 @@ export default function ChannelDetails() {
                         <div className="modal-body relative p-4">
                             <p>Members in the Channel:</p>
                             <ul>
-                                {channel.channel_members.map((member: any) => {
+                                {channel && channel.channel_members.map((member: any) => {
                                     const user = users.find((user: any) => { return user.value === member.user_id })
 
                                     return (

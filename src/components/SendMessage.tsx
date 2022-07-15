@@ -38,7 +38,7 @@ export default function SendMessage(props: any) {
         })
         .then((data) => {
             console.log('sent message');
-            console.log(data)
+            console.log(data.data[0])
             setToggleMessage(!toggleMessage)
             setMessage('')
             // setMessages([ ...messages, data]);
