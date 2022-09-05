@@ -405,13 +405,10 @@ select:invalid {
   }
 }
 
-
-//Header
 .navbar {
   overscroll-behavior: none;
 }
 
-//Sidebar
 ::-webkit-scrollbar {
   width: 5px;
   height: 5px;
