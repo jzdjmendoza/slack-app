@@ -62,8 +62,5 @@
     "mini-css-extract-plugin": "^2.4.5",
     "postcss": "^8.4.14",
     "tailwindcss": "^3.1.4"
-  },
-  "overrides": {
-    "mini-css-extract-plugin": "2.4.5"
   }
 }
